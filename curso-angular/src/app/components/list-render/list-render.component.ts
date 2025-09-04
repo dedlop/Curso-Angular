@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common'; // Isso é o que fornece *ngFor,
 
 import { Animal } from '../../Animal';
 
+import { ListService } from '../../services/list.service';
+
 @Component({
   selector: 'app-list-render',
   standalone: true, // ESSENCIAL
@@ -21,8 +23,15 @@ export class ListRenderComponent {
 
   animalDetails = ''
 
+  constructor(private listService: ListService) {}
+
   showAge(animal: Animal){
     this.animalDetails = `O pet ${animal.name} tem ${animal.age} anos!`;
+  }
+
+  removeAnimal(animal: Animal) {
+    console.log('Removendo animal...');
+    this.animals = this.listService.remove(this.animals, animal);
   }
 
 }
